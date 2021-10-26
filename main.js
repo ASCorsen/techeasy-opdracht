@@ -161,3 +161,31 @@ const inventory = [
     sold: 8,
   },
 ];
+
+// Functionaliteit bouwen
+// Opdracht 1 - Array Methoden
+// Opdracht 1a: Gebruik een array-methode om een array te maken met alle tv-type namen. Log de uitkomst in de console.
+//     Opdracht 1b: Gebruik een array-methode om alle tv's te verzamelen (de hele objecten) die volledig uitverkocht zijn. Log de uitkomst in de console.
+// Opdracht 1c: Gebruik een array-methode om alle tv's te verzamelen (de hele objecten) die over AmbiLight beschikken. Log de uitkomst in de console.
+// Opdracht 1d: Schrijf een functie die alle tv's van laagste naar hoogste prijs sorteert. Log de uitkomst in de console.
+
+
+// Opdracht 1a: Gebruik een array-methode om een array te maken met alle tv-type namen. Log de uitkomst in de console.
+// [x] maak een variabele aan en koppel de map-methode.
+// [x] declareer wat je anonieme functie moet doen.
+// [x] return de uitkomst.
+
+const typeOfTv = inventory.map((type) => {
+return type.type
+});
+
+//Opdracht 1b: Gebruik een array-methode om alle tv's te verzamelen (de hele objecten) die volledig uitverkocht zijn. Log de uitkomst in de console.
+//[] maak een variable aan die de soldout tv's in bewaard kan worden
+//[] gebruik een methode om stock/sold out met elkaar vergelijkt
+// [] return alleen sold-out tvs
+
+const soldOut = inventory.map((stock) => {
+  let inventoryStock = stock.originalStock === stock.sold
+  return inventoryStock
+})
+console.log(soldOut)
