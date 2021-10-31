@@ -163,29 +163,127 @@ const inventory = [
 ];
 
 // Functionaliteit bouwen
-// Opdracht 1 - Array Methoden
-// Opdracht 1a: Gebruik een array-methode om een array te maken met alle tv-type namen. Log de uitkomst in de console.
-//     Opdracht 1b: Gebruik een array-methode om alle tv's te verzamelen (de hele objecten) die volledig uitverkocht zijn. Log de uitkomst in de console.
-// Opdracht 1c: Gebruik een array-methode om alle tv's te verzamelen (de hele objecten) die over AmbiLight beschikken. Log de uitkomst in de console.
-// Opdracht 1d: Schrijf een functie die alle tv's van laagste naar hoogste prijs sorteert. Log de uitkomst in de console.
-
 
 // Opdracht 1a: Gebruik een array-methode om een array te maken met alle tv-type namen. Log de uitkomst in de console.
-// [x] maak een variabele aan en koppel de map-methode.
-// [x] declareer wat je anonieme functie moet doen.
-// [x] return de uitkomst.
 
 const typeOfTv = inventory.map((type) => {
 return type.type
 });
 
 //Opdracht 1b: Gebruik een array-methode om alle tv's te verzamelen (de hele objecten) die volledig uitverkocht zijn. Log de uitkomst in de console.
-//[] maak een variable aan die de soldout tv's in bewaard kan worden
-//[] gebruik een methode om stock/sold out met elkaar vergelijkt
-// [] return alleen sold-out tvs
 
-const soldOut = inventory.map((stock) => {
-  let inventoryStock = stock.originalStock === stock.sold
-  return inventoryStock
+const soldOud = inventory.filter((type) => {return type.originalStock === type.sold});
+// console.log(soldOud)
+
+
+
+// Opdracht 1c: Gebruik een array-methode om alle tv's te verzamelen (de hele objecten) die over AmbiLight beschikken. Log de uitkomst in de console.
+
+const ambiLightOptions = inventory.filter((lightOption) => {
+  return lightOption.options.ambiLight
 })
-console.log(soldOut)
+// console.log(ambiLightOptions)
+
+//* **Opdracht 1d:** Schrijf een functie die alle tv's van laagste naar hoogste prijs sorteert. Log de uitkomst in de
+
+
+const sortPriceHiLo = inventory.map((price) => {
+  return price.price
+})
+
+
+inventory.sort((a,b) => a.price - b.price);
+
+
+
+
+function calculateMaxSold(object){
+  let soldTV = 0
+  for (let i = 0; i < object.length ; i++) {
+    soldTV += object[i].sold
+  }
+  return soldTV
+}
+
+
+// * **Opdracht 2b:** Zorg ervoor dat dit aantal _in het groen_ wordt weergegeven op de pagina.
+
+const publishTvPrice = document.getElementById("article-sold-tv")
+const articlePrice = document.createElement("h4")
+articlePrice.textContent = calculateMaxSold(inventory)
+articlePrice.setAttribute("class" , "color-sold-tv")
+publishTvPrice.appendChild(articlePrice)
+
+// * **Opdracht 2c:** Hoeveel tv's heeft Tech It Easy ingekocht? Schrijf een script dat dit berekent. Log de uitkomst in de
+
+
+function callMaxBought (object) {
+  let tvStock = 0
+  for (let i = 0; i < object.length; i++) {
+    tvStock += object[i].originalStock
+    tvStock++
+  }
+  return tvStock
+}
+
+const boughtTvHtml = document.getElementById("current-tv-bought")
+const articleBoughtTv = document.createElement("H4")
+articleBoughtTv.setAttribute("class", "color-bought-tv")
+articleBoughtTv.textContent = callMaxBought(inventory)
+boughtTvHtml.appendChild(articleBoughtTv)
+
+
+// * **Opdracht 2d:** Zorg ervoor dat dit aantal _in het blauw_ wordt weergegeven op de pagina.
+//done
+// * **Opdracht 2e:** Geef _in het rood_ weer hoeveel tv's er nog verkocht moeten worden.
+
+let tvSold = 0
+for (let i = 0; i < inventory.length; i++) {
+  tvSold += inventory[i].sold
+  tvSold ++
+}
+
+
+function callCurrStock(stock, sold) {
+  return callMaxBought(stock) - calculateMaxSold(sold)
+}
+
+const tvStockHtml = document.getElementById("current-tv-stock")
+const articleTvStock = document.createElement("h4")
+articleTvStock.setAttribute("class", "color-tv-stock")
+articleTvStock.textContent = callCurrStock(inventory,inventory)
+tvStockHtml.appendChild(articleTvStock)
+
+// #### Opdracht 3 - Array methoden en functies
+// * **Opdracht 3a:** Gebruik een array-methode om alle tv merken (zoals `Philips`, `NIKKEI`, etc.) in een lijst op de
+
+const brands = inventory.map((tvbrands) => {
+  return tvbrands.brand
+})
+
+// pagina weer te geven. Zorg ervoor dat dit ook zou werken als we 200 tv's in onze array zouden hebben staan. Dat er
+// dubbele namen in zitten, is niet erg.
+// * **Opdracht 4b:** Schrijf de code uit 4a om naar een functie die een array met tv-objecten verwacht. Het is handig om
+// onze scripts als functies op te zetten, zodat we ze gemakkelijk kunnen hergebruiken. _Tip_: vergeet deze functie
+// -declaratie niet aan te roepen!
+
+
+function getBrands(input) {
+  const brands = input.map((tvbrands) => {
+    return tvbrands.brand
+  })
+  return brands
+}
+
+
+console.log(getBrands(inventory))
+
+
+const tvBrandhtml = document.getElementById("tv-brands")
+const sectionBrands = document.createElement("h4")
+sectionBrands.setAttribute("class","color-brands-css")
+sectionBrands.textContent = `${brands}`
+tvBrandhtml.appendChild(sectionBrands)
+
+
+
