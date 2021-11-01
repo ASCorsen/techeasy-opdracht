@@ -1,0 +1,18 @@
+.color-sold-tv {
+    color: green;
+}
+.color-bought-tv {
+    color: blue;
+}
+.color-tv-stock {
+    color: red;
+}
+.css-div-tv {
+    border: 1px solid black;
+    list-style-type: none;
+
+}
+.css-div-function {
+    border: black;
+    list-style: none;
+}
